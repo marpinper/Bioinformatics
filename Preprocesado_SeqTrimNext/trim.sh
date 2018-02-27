@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Leave only one comment symbol on selected options
+# Those with two commets will be ignored:
+# The name to show in queue lists for this job:
+##SBATCH -J GENERATED_SCRIPT_FILE
+
+# Number of desired cpus (can be in any node):
+#SBATCH --ntasks=8
+
+# Number of desired cpus (all in same node):
+##SBATCH --cpus=1
+
+# Amount of RAM needed for this job:
+#SBATCH --mem=2gb
+
+# The time the job will be running:
+#SBATCH --time=168:00:00
+
+# To use GPUs you have to request them:
+##SBATCH --gres=gpu:1
+
+# If you need nodes with special features uncomment the desired constraint line:
+# * to request only the machines with 80 cores and 2TB of RAM
+##SBATCH --constraint=bigmem
+# * to request only machines with 16 cores and 64GB with InfiniBand network
+##SBATCH --constraint=cal
+# * to request only machines with 24 cores and Gigabit network
+##SBATCH --constraint=slim
+
+# Set output and error files
+#SBATCH --error=job.%J.err
+#SBATCH --output=job.%J.out
+
+# MAKE AN ARRAY JOB, SLURM_ARRAYID will take values from 1 to 100
+##SARRAY --range=1-100
+
+# To load some software (you can show the list with 'module avail'):
+module load seqtrimnext
+
+
+# the program to execute with its parameters:
+time seqtrimnext -t ~/path/to/plantilla/genomics_short_reads.txt  -Q ~/path/to/.fastq.gz,~/path/to/.fastq.gz  -w 8 -K
+
+
