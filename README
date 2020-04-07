@@ -1,0 +1,6 @@
+This repository groups different small bioinformatics projects that I developed:
+
+- Sequence alignment in C and Python
+- Kmers and Codon computing from FASTA sequences in C
+- SLURM supercomputer scripts for sequence preprocessing and mapping
+- R scripts for Differential Expression analysis using DESEQ2
